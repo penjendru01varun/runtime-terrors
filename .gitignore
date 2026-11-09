@@ -1,0 +1,44 @@
+# Runtime Terrors — Git Ignore
+
+# Dependencies
+node_modules/
+.pnpm-store/
+jspm_packages/
+
+# Production Build Outputs
+dist/
+out/
+build/
+*.vsix
+
+# Environment, Secrets & Credentials
+.env
+.env.*
+!.env.example
+credentials.json
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+*.log
+
+# TrueForge Official Repository (Used as external runtime engine, not part of this submission)
+trueforge/
+../trueforge/
+
+# TypeScript Cache
+*.tsbuildinfo
+
+# Editor & OS Artifacts
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+

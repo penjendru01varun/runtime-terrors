@@ -1,0 +1,152 @@
+{
+  "name": "runtime-terrors",
+  "displayName": "Runtime Terrors",
+  "description": "Professional VS Code-native AI coding assistant powered by the TrueForge agent execution runtime.",
+  "version": "0.1.0",
+  "publisher": "runtime-terrors",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Programming Languages",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "ai",
+    "assistant",
+    "agent",
+    "trueforge",
+    "diff",
+    "inline edit",
+    "coding"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "runtime-terrors-container",
+          "title": "Runtime Terrors",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "runtime-terrors-container": [
+        {
+          "type": "webview",
+          "id": "runtime-terrors.chatView",
+          "name": "Runtime Terrors",
+          "visibility": "visible"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "runtime-terrors.openChat",
+        "title": "Runtime Terrors: Open Chat Panel",
+        "category": "Runtime Terrors"
+      },
+      {
+        "command": "runtime-terrors.inlineEdit",
+        "title": "Runtime Terrors: Inline Code Edit",
+        "category": "Runtime Terrors"
+      },
+      {
+        "command": "runtime-terrors.autonomousAgent",
+        "title": "Runtime Terrors: Launch Autonomous Agent",
+        "category": "Runtime Terrors"
+      },
+      {
+        "command": "runtime-terrors.reviewDiffs",
+        "title": "Runtime Terrors: Review Proposed Changes",
+        "category": "Runtime Terrors"
+      },
+      {
+        "command": "runtime-terrors.newSession",
+        "title": "Runtime Terrors: Start New Session",
+        "category": "Runtime Terrors"
+      },
+      {
+        "command": "runtime-terrors.connectTrueForge",
+        "title": "Runtime Terrors: Test TrueForge Connection",
+        "category": "Runtime Terrors"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "runtime-terrors.inlineEdit",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Runtime Terrors",
+      "properties": {
+        "runtimeTerrors.trueforgeUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8790",
+          "description": "Base URL of the TrueForge Agent Harness server (e.g. http://127.0.0.1:8790)."
+        },
+        "runtimeTerrors.apiToken": {
+          "type": "string",
+          "default": "",
+          "description": "Optional Bearer API token for TrueForge server authentication (not required in standalone mode)."
+        },
+        "runtimeTerrors.defaultModel": {
+          "type": "string",
+          "default": "openai/gpt-4o",
+          "description": "Default model provider and identifier to use with TrueForge (e.g. openai/gpt-4o, anthropic/claude-3-7-sonnet)."
+        },
+        "runtimeTerrors.autoRegisterMcp": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically register the local workspace MCP server with the TrueForge runtime."
+        },
+        "runtimeTerrors.enableTelemetry": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow anonymized local diagnostic logging."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build:ext": "node esbuild.mjs",
+    "build:web": "vite build --config webview-ui/vite.config.ts",
+    "build": "npm run build:ext && npm run build:web",
+    "watch:ext": "node esbuild.mjs --watch",
+    "watch:web": "vite build --watch --config webview-ui/vite.config.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit && tsc -p webview-ui/tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.0",
+    "@truefoundry/trueforge-sdk": "^0.184.0",
+    "diff": "^7.0.0",
+    "lucide-react": "^0.475.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/diff": "^7.0.0",
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/vscode": "^1.90.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "esbuild": "^0.25.0",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.5"
+  }
+}
